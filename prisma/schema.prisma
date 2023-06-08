@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model user{
+  id        String      @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+}
+
+model sede{
+  id        String      @id @default(uuid())
+  name      String
+  facultades     facultad[]
+}
+
+model facultad{
+  id        String      @id @default(uuid())
+  name      String
+  sede      sede        @relation(fields: [sedeId], references: [id])
+  sedeId    String
+  carreras carrera[]
+}
+
+model carrera{
+  id        String      @id @default(uuid())
+  name      String
+  facultad  facultad    @relation(fields: [facultadId], references: [id])
+  facultadId String
+  asesora  asesora @relation(fields: [asesoraId], references: [id])
+  asesoraId String
+  asignaturas asignatura_carrera[]
+}
+
+model asignatura{
+  id        String      @id @default(uuid())
+  name      String
+  carreras  asignatura_carrera[]
+}
+
+model asignatura_carrera{
+  id        String      @id @default(uuid())
+  carrera   carrera     @relation(fields: [carreraId], references: [id])
+  carreraId String
+  asignatura asignatura @relation(fields: [asignaturaId], references: [id])
+  asignaturaId String
+}
+
+model asesora{
+  id        String      @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  carreras  carrera[]
+}
+
