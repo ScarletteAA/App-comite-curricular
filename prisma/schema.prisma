@@ -10,56 +10,63 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user{
-  id        String      @id @default(uuid())
-  name      String
-  email     String   @unique
-  password  String
+model sede {
+  id          String     @id @default(uuid())
+  name        String
+  facultades  facultad[]
+  historiales history[]
 }
 
-model sede{
-  id        String      @id @default(uuid())
-  name      String
-  facultades     facultad[]
+model facultad {
+  id          String    @id @default(uuid())
+  name        String
+  sede        sede      @relation(fields: [sedeId], references: [id])
+  sedeId      String
+  carreras    carrera[]
+  historiales history[]
 }
 
-model facultad{
-  id        String      @id @default(uuid())
-  name      String
-  sede      sede        @relation(fields: [sedeId], references: [id])
-  sedeId    String
-  carreras carrera[]
-}
-
-model carrera{
-  id        String      @id @default(uuid())
-  name      String
-  facultad  facultad    @relation(fields: [facultadId], references: [id])
-  facultadId String
-  asesora  asesora @relation(fields: [asesoraId], references: [id])
-  asesoraId String
+model carrera {
+  id          String               @id @default(uuid())
+  name        String
+  facultad    facultad             @relation(fields: [facultadId], references: [id])
+  facultadId  String
+  asesora     asesora              @relation(fields: [asesoraId], references: [id])
+  asesoraId   String
   asignaturas asignatura_carrera[]
 }
 
-model asignatura{
-  id        String      @id @default(uuid())
-  name      String
-  carreras  asignatura_carrera[]
+model asignatura {
+  id       String               @id @default(uuid())
+  name     String
+  carreras asignatura_carrera[]
 }
 
-model asignatura_carrera{
-  id        String      @id @default(uuid())
-  carrera   carrera     @relation(fields: [carreraId], references: [id])
-  carreraId String
-  asignatura asignatura @relation(fields: [asignaturaId], references: [id])
+model asignatura_carrera {
+  id           String     @id @default(uuid())
+  carrera      carrera    @relation(fields: [carreraId], references: [id])
+  carreraId    String
+  asignatura   asignatura @relation(fields: [asignaturaId], references: [id])
   asignaturaId String
 }
 
-model asesora{
-  id        String      @id @default(uuid())
-  name      String
-  email     String   @unique
-  password  String
-  carreras  carrera[]
+model asesora {
+  id          String    @id @default(uuid())
+  name        String
+  email       String    @unique
+  password    String
+  carreras    carrera[]
+  historiales history[]
 }
 
+model history {
+  id          String   @id @default(uuid())
+  fecha       DateTime
+  descripcion String
+  asesora     asesora  @relation(fields: [id_asesora], references: [id])
+  id_asesora  String
+  sede        sede     @relation(fields: [id_sede], references: [id])
+  id_sede     String
+  facultad    facultad @relation(fields: [id_facultad], references: [id])
+  id_facultad String
+}
