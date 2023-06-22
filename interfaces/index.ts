@@ -41,3 +41,8 @@ export interface Asignatura {
     name: string
     carrera: Carrera
 }
+
+export interface ProfileData {
+    name: string
+    email: string
+}

@@ -1,3 +1,4 @@
+import AuthContextProvider from '@/Contexts/authContext'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -17,7 +18,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={
         `h-screen w-screen flex flex-row`
-      }>{children}</body>
+      }>
+        <AuthContextProvider>{children}</AuthContextProvider>
+      </body>
     </html>
   )
 }

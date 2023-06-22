@@ -1,4 +1,5 @@
 'use client';
+import { useAuthContext } from "@/Contexts/authContext";
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -7,6 +8,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const { login } = useAuthContext();
 
   function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value);
@@ -23,7 +25,7 @@ const Login = () => {
     try {
       const response = await axios.post("api/login", { email, password });
       const token = response.data.token;
-      localStorage.setItem("token", token);
+      login(token);
       return router.push("/homes");
     }
     catch (error) {

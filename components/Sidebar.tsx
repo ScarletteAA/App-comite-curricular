@@ -1,6 +1,22 @@
+"use client";
+import { ProfileData } from '@/interfaces';
+import Link from 'next/link'
 import React from 'react'
 
+
+
 export const Sidebar = () => {
+    const [profile, setProfile] = React.useState<ProfileData>()
+
+    React.useEffect(() => {
+        const getProfile = async () => {
+            const res = await fetch('http://localhost:3000/api/profile')
+            const data = await res.json()
+            setProfile(data)
+        }
+        getProfile()
+    }, [])
+
     return (
         <div className="bg-slate-100 h-screen text-slate-300         selection:bg-blue-600 selection:text-white">
             <div className="flex flex-col">
@@ -13,10 +29,10 @@ export const Sidebar = () => {
                         <p className="text-slate-500">Welcome back,</p>
                         <a href="#" className="inline-flex space-x-2 items-center">
                             <span>
-                                <img className="rounded-full w-8 h-8" src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=128&q=80" alt=""></img>
+                                <img className="rounded-full w-8 h-8" src="https://www.softzone.es/app/uploads/2018/04/guest.png" alt=""></img>
                             </span>
                             <span className="text-sm md:text-base font-bold">
-                                pepito
+                                {profile?.name}
                             </span>
                         </a>
                     </div>
@@ -67,6 +83,16 @@ export const Sidebar = () => {
                                 <span className="text-sm text-slate-500 hidden md:block">Edit App Settings</span>
                             </div>
                         </a>
+                        <Link href="/homes/logout" className="w-full px-2 inline-flex space-x-2 items-center py-3 hover:bg-white/5 transition ease-linear duration-150">
+                            <div>
+
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="text-lg text-slate-300 font-bold leading-5">Logout</span>
+
+                            </div>
+                        </Link>
+
 
                     </div>
                 </div>
