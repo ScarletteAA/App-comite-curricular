@@ -23,11 +23,10 @@ export const History = () => {
     ];
     return (
         <div >
-            <div className="bg-slate-100 h-screen text-slate-300         selection:bg-blue-600 selection:text-white
-            fixed top-0 right-0 w-64 h-screen flex flex-col justify-between
+            <div className="bg-slate-100 text-slate-300 selection:bg-blue-600 selection:text-white right-0 
             ">
                 <div className="flex flex-col">
-                    <div id="menu" className="bg-gray-900 min-h-screen z-10 text-slate-300 w-64 h-screen ">
+                    <div id="menu" className="bg-gray-900  text-slate-300 w-64 h-screen">
                         <div id="logo" className="my-4 px-6">
                             <h1 className="text-lg md:text-2xl font-bold text-white">Historial de cambios<span className="text-blue-500"></span></h1>
                         </div>

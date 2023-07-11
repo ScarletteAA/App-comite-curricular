@@ -1,6 +1,7 @@
 import AuthContextProvider from '@/Contexts/authContext'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import SedeContextProvider from '@/Contexts/sedeContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,7 +20,11 @@ export default function RootLayout({
       <body className={
         `h-screen w-screen flex flex-row`
       }>
-        <AuthContextProvider>{children}</AuthContextProvider>
+        <AuthContextProvider>
+          <SedeContextProvider>
+            {children}
+          </SedeContextProvider>
+        </AuthContextProvider>
       </body>
     </html>
   )

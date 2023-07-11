@@ -18,7 +18,8 @@ export const Sidebar = () => {
     }, [])
 
     return (
-        <div className="bg-slate-100 h-screen text-slate-300         selection:bg-blue-600 selection:text-white">
+        <div className="bg-slate-100 h-screen text-slate-300         selection:bg-blue-600 selection:text-white
+        ">
             <div className="flex flex-col">
                 <div id="menu" className="bg-gray-900 min-h-screen z-10 text-slate-300 w-64 h-screen ">
                     <div id="logo" className="my-4 px-6">

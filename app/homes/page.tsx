@@ -14,23 +14,10 @@ async function getSedes(): Promise<Sede[]> {
 const Homes = async () => {
     const sedes: Sede[] = await getSedes();
     return <>
-        <div
-            className="flex flex-row w-screen"
-        >
-
+        <div className="flex flex-row h-screen w-screen">
             <Sidebar />
-            <div>
-                <div className="bg-gray-100">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
-                            <h2 className="text-2xl font-bold text-gray-900">Sedes</h2>
-                            <ShowSedes sedes={sedes} />
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <ShowSedes sedes={sedes} />
             <History />
-
         </div >
 
     </>
