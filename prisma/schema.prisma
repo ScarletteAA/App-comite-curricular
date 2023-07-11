@@ -33,7 +33,10 @@ model carrera {
   facultadId  String
   asesora     asesora              @relation(fields: [asesoraId], references: [id])
   asesoraId   String
+  fechaInicio String
+  is_Carrera_Espejo Boolean
   asignaturas asignatura_carrera[]
+  fases       fases_carrera[]
 }
 
 model asignatura {
@@ -69,4 +72,26 @@ model history {
   id_sede     String
   facultad    facultad @relation(fields: [id_facultad], references: [id])
   id_facultad String
+}
+
+model seguimiento {
+  id               String   @id @default(uuid())
+  nombre_fase      String
+  fase_carrera     fases_carrera[]
+}
+
+model evaluacion {
+  id               String   @id @default(uuid())
+  nombre_fase      String
+  fase_carrera     fases_carrera[]
+}
+
+model fases_carrera {
+  id              String   @id @default(uuid())
+  carrera         carrera  @relation(fields: [id_carrera], references: [id])
+  id_carrera      String
+  seguimiento     seguimiento @relation(fields: [id_seguimiento], references: [id])
+  id_seguimiento  String
+  evaluacion      evaluacion  @relation(fields: [id_evaluacion], references: [id])
+  id_evaluacion   String
 }
