@@ -27,22 +27,26 @@ model facultad {
 }
 
 model carrera {
-  id          String               @id @default(uuid())
-  name        String
-  facultad    facultad             @relation(fields: [facultadId], references: [id])
-  facultadId  String
-  asesora     asesora              @relation(fields: [asesoraId], references: [id])
-  asesoraId   String
-  fechaInicio String
-  is_Carrera_Espejo Boolean
-  asignaturas asignatura_carrera[]
-  fases       fases_carrera[]
+  id                 String               @id @default(uuid())
+  name               String
+  facultad           facultad             @relation(fields: [facultadId], references: [id])
+  facultadId         String
+  asesora            asesora              @relation(fields: [asesoraId], references: [id])
+  asesoraId          String
+  fechaInicio        String
+  is_Carrera_Espejo  Boolean
+  asignaturas_claves asignatura_carrera[]
+  fases              fases_carrera[]
+  bitacora_anual     bitacora_anual[]
+  comite             Boolean
+  historico          historico[]
 }
 
 model asignatura {
-  id       String               @id @default(uuid())
-  name     String
-  carreras asignatura_carrera[]
+  id                   String                 @id @default(uuid())
+  name                 String
+  carreras             asignatura_carrera[]
+  asignaturas_criticas asignaturas_criticas[]
 }
 
 model asignatura_carrera {
@@ -54,12 +58,13 @@ model asignatura_carrera {
 }
 
 model asesora {
-  id          String    @id @default(uuid())
+  id          String      @id @default(uuid())
   name        String
-  email       String    @unique
+  email       String      @unique
   password    String
   carreras    carrera[]
   historiales history[]
+  historico   historico[]
 }
 
 model history {
@@ -75,23 +80,64 @@ model history {
 }
 
 model seguimiento {
-  id               String   @id @default(uuid())
-  nombre_fase      String
-  fase_carrera     fases_carrera[]
+  id           String          @id @default(uuid())
+  nombre_fase  String
+  fase_carrera fases_carrera[]
 }
 
 model evaluacion {
-  id               String   @id @default(uuid())
-  nombre_fase      String
-  fase_carrera     fases_carrera[]
+  id           String          @id @default(uuid())
+  nombre_fase  String
+  fase_carrera fases_carrera[]
 }
 
 model fases_carrera {
-  id              String   @id @default(uuid())
-  carrera         carrera  @relation(fields: [id_carrera], references: [id])
-  id_carrera      String
-  seguimiento     seguimiento @relation(fields: [id_seguimiento], references: [id])
-  id_seguimiento  String
-  evaluacion      evaluacion  @relation(fields: [id_evaluacion], references: [id])
-  id_evaluacion   String
+  id             String      @id @default(uuid())
+  carrera        carrera     @relation(fields: [id_carrera], references: [id])
+  id_carrera     String
+  seguimiento    seguimiento @relation(fields: [id_seguimiento], references: [id])
+  id_seguimiento String
+  evaluacion     evaluacion  @relation(fields: [id_evaluacion], references: [id])
+  id_evaluacion  String
+}
+
+model bitacora_anual {
+  id                   String                 @id @default(uuid())
+  carrera              carrera                @relation(fields: [id_carrera], references: [id])
+  id_carrera           String
+  bitacora_mensual     bitacora_mensual[]
+  asignaturas_criticas asignaturas_criticas[]
+}
+
+model bitacora_mensual {
+  id                String         @id @default(uuid())
+  bitacora_anual    bitacora_anual @relation(fields: [id_bitacora_anual], references: [id])
+  id_bitacora_anual String
+  mes               String
+  n_sesiones        Int
+  comentarios       String
+}
+
+model asignaturas_criticas {
+  id                String         @id @default(uuid())
+  asignatura        asignatura     @relation(fields: [id_asignatura], references: [id])
+  id_asignatura     String
+  bitacora_anual    bitacora_anual @relation(fields: [id_bitacora_anual], references: [id])
+  id_bitacora_anual String
+}
+
+model historico {
+  id                     String  @id @default(uuid())
+  ultimo_rediseno        String
+  ultimo_ajuste_mayor    String
+  ultimo_ajuste_menor    String
+  fecha_resolucion_dgpre String
+  administradora_dgpre   String
+  anos_ultimo_ajuste     Int
+  numero_redisenos       Int
+  carrera                carrera @relation(fields: [id_carrera], references: [id])
+  id_carrera             String
+  asesora                asesora @relation(fields: [id_asesora], references: [id])
+  id_asesora             String
+  observaciones          String
 }

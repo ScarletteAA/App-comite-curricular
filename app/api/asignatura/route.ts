@@ -23,3 +23,16 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   });
   return NextResponse.json(asignatura);
 };
+
+export const GET = async (req: NextRequest, res: NextResponse) => {
+  const asignaturas = await prisma.asignatura.findMany({
+    include: {
+      carreras: {
+        include: {
+          carrera: true,
+        },
+      },
+    },
+  });
+  return NextResponse.json(asignaturas);
+};

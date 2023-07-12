@@ -4,7 +4,7 @@ import { NextResponse, NextRequest } from "next/server";
 const prisma = new PrismaClient();
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
-  const { name, facultadId, asesoraId, fechaInicio, carreraEspejo } =
+  const { name, facultadId, asesoraId, fechaInicio, carreraEspejo, comite_estado } =
     await req.json();
   const carrera = await prisma.carrera.create({
     data: {
@@ -19,6 +19,9 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
           id: asesoraId,
         },
       },
+      fechaInicio: fechaInicio,
+      is_Carrera_Espejo: carreraEspejo,
+      comite: comite_estado,
     },
   });
   return NextResponse.json(carrera);
