@@ -46,7 +46,7 @@ model asignatura {
   id                   String                 @id @default(uuid())
   name                 String
   carreras             asignatura_carrera[]
-  asignaturas_criticas asignaturas_criticas[]
+  asignaturas_criticas asignaturas_criticas[] //bitacora anual
 }
 
 model asignatura_carrera {
