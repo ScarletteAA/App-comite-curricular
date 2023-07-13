@@ -1,5 +1,7 @@
 "use client";
 import { Facultad } from "@/interfaces";
+import { useRouter } from "next/navigation";
+
 
 
 interface Props {
@@ -9,6 +11,7 @@ interface Props {
 }
 
 const ShowCarreras: React.FC<Props> = ({ handleHidePopup, selectedFacultad }) => {
+    const router = useRouter();
 
     return (
         <div className="fixed z-10 h-screen w-screen flex item-center justify-center inset-0 bg-black bg-opacity-50">
@@ -33,9 +36,11 @@ const ShowCarreras: React.FC<Props> = ({ handleHidePopup, selectedFacultad }) =>
 
                                             >
                                                 <div className="px-6 py-4 whitespace-nowrap">
-                                                    <div className="text-sm text-gray-900 dark:text-gray-200">
+                                                    <button className="text-sm text-gray-900 dark:text-gray-200"
+                                                        onClick={() => { router.push('/homes/planilla/' + carrera.id) }}
+                                                    >
                                                         {carrera.name}
-                                                    </div>
+                                                    </button>
                                                 </div>
                                             </div>
                                         ))}

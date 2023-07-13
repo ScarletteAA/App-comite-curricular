@@ -12,7 +12,7 @@ export const GET = async (
       id: id,
     },
     include: {
-      asignaturas: {
+      asignaturas_claves: {
         include: {
           asignatura: true,
         },
