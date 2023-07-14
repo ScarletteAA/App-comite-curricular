@@ -23,11 +23,11 @@ const Home: React.FC<Props> = ({ carrera }) => {
   const planillas: Planilla[] = [
     {
       id: 1,
-      name: "Bitacora",
+      name: "Status",
     },
     {
       id: 2,
-      name: "Status",
+      name: "Bitacora",
     },
     {
       id: 3,

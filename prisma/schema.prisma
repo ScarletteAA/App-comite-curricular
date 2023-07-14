@@ -28,6 +28,7 @@ model facultad {
 
 model carrera {
   id                 String               @id @default(uuid())
+  codigo_carrera     String
   name               String
   facultad           facultad             @relation(fields: [facultadId], references: [id])
   facultadId         String
@@ -39,7 +40,7 @@ model carrera {
   fases              fases_carrera[]
   bitacora_anual     bitacora_anual[]
   comite             Boolean
-  historico          historico[]
+  historico          historico?
 }
 
 model asignatura {
@@ -136,7 +137,7 @@ model historico {
   anos_ultimo_ajuste     Int
   numero_redisenos       Int
   carrera                carrera @relation(fields: [id_carrera], references: [id])
-  id_carrera             String
+  id_carrera             String  @unique
   asesora                asesora @relation(fields: [id_asesora], references: [id])
   id_asesora             String
   observaciones          String
