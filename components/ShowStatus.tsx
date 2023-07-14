@@ -1,3 +1,7 @@
+"use client";
+
+interface Props {}
+
 const ShowStatus = () => {
   return (
     <div>

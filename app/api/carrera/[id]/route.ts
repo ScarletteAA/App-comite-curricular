@@ -17,6 +17,23 @@ export const GET = async (
           asignatura: true,
         },
       },
+      fases: {
+        include: {
+          seguimiento: true,
+          evaluacion: true,
+        },
+      },
+      bitacora_anual: {
+        include: {
+          bitacora_mensual: true,
+          asignaturas_criticas: {
+            include: {
+              asignatura: true,
+            },
+          },
+        },
+      },
+      historico: true,
     },
   });
   return NextResponse.json(carrera);
