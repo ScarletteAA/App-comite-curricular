@@ -37,14 +37,14 @@ export default function Home() {
   ];
 
   return (
-    <main className="flex flex-col items-center justify-between min-h-screen p-24">
-      Hola
+    <main className="flex flex-col items-center justify-center h-screen w-screen p-24">
+      <h1 className="text-4xl font-bold">Selecciona una opción para visualizar las planillas: </h1>
       <div className="">
         <ul className="flex flex-wrap">
           {cars.map((car) => (
             <li
               key={car.id}
-              className={`flex items-center justify-between p-4 my-2 bg-gray-100 rounded-md
+              className={`flex items-center justify-center p-8 my-4 bg-gray-100 rounded-md
                   ${selectedCar?.id === car.id ? "bg-green-500" : ""}
                 `}
               onClick={() => setSelectedCar(car)}
@@ -60,20 +60,26 @@ export default function Home() {
           ))}
         </ul>
       </div>
-      <div className="">
+      <div className="flex flex-col items-center justify-center p-24">
         {selectedCar?.name === "Bitacora" && (
-          <div className="flex items-center justify-between p-4 my-2 bg-gray-100 rounded-md">
-            <ShowBitacora />
+          <div className="flex items-center justify-center p-8 my-4 bg-gray-100 rounded-md">
+            <div className="w-full">
+              <ShowBitacora />
+            </div>
           </div>
         )}
         {selectedCar?.name === "Status" && (
-          <div className="flex items-center justify-between p-4 my-2 bg-gray-100 rounded-md">
-            <ShowStatus />
+          <div className="flex items-center justify-center p-8 my-4 bg-gray-100 rounded-md">
+            <div className="w-full">
+              <ShowStatus />
+            </div>
           </div>
         )}
         {selectedCar?.name === "Historico" && (
-          <div className="flex items-center justify-between p-4 my-2 bg-gray-100 rounded-md">
-            <ShowHistorico />
+          <div className="flex items-center justify-center p-8 my-4 bg-gray-100 rounded-md">
+            <div className="w-full">
+              <ShowHistorico />
+            </div>
           </div>
         )}
       </div>
