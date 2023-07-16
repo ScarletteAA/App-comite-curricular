@@ -19,7 +19,6 @@ export default function AuthContextProvider({
     children: ReactNode;
 
 }) {
-    const authTokensInLocalStorage = Cookies.get('authTokens');
 
     const login = useCallback(function (authTokens: AuthContextType) {
         Cookies.set('authTokens', JSON.stringify(authTokens));
