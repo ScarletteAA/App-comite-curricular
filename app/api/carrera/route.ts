@@ -44,3 +44,16 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   });
   return NextResponse.json(carreras);
 };
+
+export const PATCH = async (req: NextRequest, res: NextResponse) => {
+  const { id, comite_estado } = await req.json();
+  const carrera = await prisma.carrera.update({
+    where: {
+      id: id,
+    },
+    data: {
+      comite: comite_estado,
+    },
+  });
+  return NextResponse.json(carrera);
+};

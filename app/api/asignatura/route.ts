@@ -8,19 +8,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   const asignatura = await prisma.asignatura.create({
     data: {
       name: name,
-      carreras: {
-        create: [
-          {
-            carrera: {
-              connect: {
-                id: carreraId,
-              },
-            },
-          },
-        ],
-      },
-
-    }
+    },
   });
   return NextResponse.json(asignatura);
 };

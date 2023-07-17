@@ -47,7 +47,7 @@ model asignatura {
   id                   String                 @id @default(uuid())
   name                 String
   carreras             asignatura_carrera[]
-  asignaturas_criticas asignaturas_criticas[] //bitacora anual
+  asignaturas_criticas asignaturas_criticas[]
 }
 
 model asignatura_carrera {
@@ -106,6 +106,7 @@ model bitacora_anual {
   id                   String                 @id @default(uuid())
   carrera              carrera                @relation(fields: [id_carrera], references: [id])
   id_carrera           String
+  year                 String
   bitacora_mensual     bitacora_mensual[]
   asignaturas_criticas asignaturas_criticas[]
 }
@@ -115,7 +116,8 @@ model bitacora_mensual {
   bitacora_anual    bitacora_anual @relation(fields: [id_bitacora_anual], references: [id])
   id_bitacora_anual String
   mes               String
-  n_sesiones        Int
+  n_sesiones_planificadas   Int
+  n_sesiones_realizadas Int
   comentarios       String
 }
 

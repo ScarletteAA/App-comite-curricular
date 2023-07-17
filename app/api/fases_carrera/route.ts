@@ -27,4 +27,24 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   return NextResponse.json(fases_carrera);
 };
 
-//TODO: Hacer metodo update
+export const PATCH = async (req: NextRequest, res: NextResponse) => {
+  const { id, id_seguimiento, id_evaluacion } = await req.json();
+  const fases_carrera = await prisma.fases_carrera.update({
+    where: {
+      id: id,
+    },
+    data: {
+      seguimiento: {
+        connect: {
+          id: id_seguimiento,
+        },
+      },
+      evaluacion: {
+        connect: {
+          id: id_evaluacion,
+        },
+      },
+    },
+  });
+  return NextResponse.json(fases_carrera);
+};
