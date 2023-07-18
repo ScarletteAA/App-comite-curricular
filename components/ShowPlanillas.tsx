@@ -72,7 +72,7 @@ const Home: React.FC<Props> = ({ carrera }) => {
         {selectedPlanilla?.name === "Status" && (
           <div className="flex items-center justify-center p-8 my-4 bg-gray-100 rounded-md">
             <div className="w-full">
-              <ShowStatus />
+              <ShowStatus carrera={carrera} />
             </div>
           </div>
         )}

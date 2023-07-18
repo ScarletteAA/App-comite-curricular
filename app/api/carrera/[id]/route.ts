@@ -12,6 +12,7 @@ export const GET = async (
       id: id,
     },
     include: {
+      asesora: true,
       asignaturas_claves: {
         include: {
           asignatura: true,

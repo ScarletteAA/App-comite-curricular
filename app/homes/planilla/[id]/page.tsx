@@ -8,7 +8,6 @@ const getCarrera = async (id: string) => {
 
 const Page = async ({ params: { id } }: { params: { id: string } }) => {
   const carrera = await getCarrera(id);
-
   return <ShowPlanillas carrera={carrera} />;
 };
 

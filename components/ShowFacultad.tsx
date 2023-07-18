@@ -17,6 +17,7 @@ const ShowFacultad: React.FC<Props> = ({ sede }) => {
 
   const handleShowCarreras = (facultad: Facultad) => {
     setSelectedFacultad(facultad);
+    console.log(facultad.carreras);
     handleShowPopup();
   };
 

@@ -1,11 +1,22 @@
 "use client";
 
-interface Props {}
+import { Carrera } from "@/interfaces";
+import React from "react";
 
-const ShowStatus = () => {
+interface Props {
+  carrera: Carrera;
+}
+
+const ShowStatus: React.FC<Props> = ({ carrera }) => {
   return (
     <div>
-      <h1>Soy un Status</h1>
+      <p>{carrera.comite.valueOf()}</p>
+      {carrera.fases.map((fase) => (
+        <div>
+          {fase.seguimiento.nombre_fase}
+          {fase.evaluacion.nombre_fase}
+        </div>
+      ))}
     </div>
   );
 };
