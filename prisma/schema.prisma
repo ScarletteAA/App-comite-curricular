@@ -22,20 +22,26 @@ model facultad {
   name        String
   sede        sede      @relation(fields: [sedeId], references: [id])
   sedeId      String
-  carreras    carrera[]
+  carreras    carreras_facultad[]
   historiales history[]
+}
+
+model carreras_facultad {
+  id        String    @id @default(uuid())
+  facultad  facultad  @relation(fields: [facultadId], references: [id])
+  facultadId String
+  carrera   carrera   @relation(fields: [carreraId], references: [id])
+  carreraId String
 }
 
 model carrera {
   id                 String               @id @default(uuid())
   codigo_carrera     String
   name               String
-  facultad           facultad             @relation(fields: [facultadId], references: [id])
-  facultadId         String
+  facultad           carreras_facultad[]
   asesora            asesora              @relation(fields: [asesoraId], references: [id])
   asesoraId          String
   fechaInicio        String
-  is_Carrera_Espejo  Boolean
   asignaturas_claves asignatura_carrera[]
   fases              fases_carrera[]
   bitacora_anual     bitacora_anual[]
