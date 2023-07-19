@@ -34,7 +34,11 @@ export const GET = async (
           },
         },
       },
-      historico: true,
+      historico: {
+        include: {
+          asesora: true,
+        },
+      },
     },
   });
   return NextResponse.json(carrera);
