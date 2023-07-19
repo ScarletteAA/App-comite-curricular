@@ -80,7 +80,7 @@ const Home: React.FC<Props> = ({ carrera }) => {
         {selectedPlanilla?.name === "Historico" && (
           <div className="flex items-center justify-center p-8 my-4 bg-gray-100 rounded-md">
             <div className="w-full">
-              <ShowHistorico />
+              <ShowHistorico historico={carrera.historico} />
             </div>
           </div>
         )}

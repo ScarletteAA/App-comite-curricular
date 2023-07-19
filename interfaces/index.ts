@@ -27,7 +27,7 @@ export interface Carrera {
   asignaturas_claves: Asignaturas_claves[];
   fases: Fases_carrera[];
   bitacora_anual: Bitacora_anual[];
-  historico: Historico[];
+  historico: Historico;
 }
 
 export interface Asignaturas_claves {
