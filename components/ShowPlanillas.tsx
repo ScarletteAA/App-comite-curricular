@@ -5,6 +5,7 @@ import ShowHistorico from "@/components/ShowHistorico";
 import ShowStatus from "@/components/ShowStatus";
 import { Carrera } from "@/interfaces";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface Planilla {
@@ -20,6 +21,8 @@ const Home: React.FC<Props> = ({ carrera }) => {
   const [selectedPlanilla, setSelectedPlanilla] =
     React.useState<Planilla | null>(null);
 
+  const router = useRouter();
+
   const planillas: Planilla[] = [
     {
       id: 1,
@@ -34,6 +37,10 @@ const Home: React.FC<Props> = ({ carrera }) => {
       name: "Historico",
     },
   ];
+
+  const handleBackClick = () => {
+    router.back();
+  };
 
   return (
     <main className="flex flex-col items-center justify-center h-screen w-screen p-24">
@@ -51,12 +58,6 @@ const Home: React.FC<Props> = ({ carrera }) => {
               onClick={() => setSelectedPlanilla(planilla)}
             >
               <span>{planilla.name}</span>
-              <Image
-                src="/images/arrow-right.svg"
-                alt="arrow right"
-                width={16}
-                height={16}
-              />
             </li>
           ))}
         </ul>
@@ -66,7 +67,6 @@ const Home: React.FC<Props> = ({ carrera }) => {
           <div className="flex items-center justify-center p-8 my-4 bg-gray-100 rounded-md">
             <div className="w-full">
               <ShowBitacora bitacora_anual={carrera.bitacora_anual} />
-
             </div>
           </div>
         )}
@@ -85,6 +85,12 @@ const Home: React.FC<Props> = ({ carrera }) => {
           </div>
         )}
       </div>
+      <button
+        className="text-gray-200 block rounded-lg text-center font-medium leading-6 px-6 py-4 bg-gray-900 hover:bg-black hover:text-white"
+        onClick={handleBackClick}
+      >
+        Salir
+      </button>
     </main>
   );
 };

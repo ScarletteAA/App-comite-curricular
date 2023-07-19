@@ -10,7 +10,6 @@ interface Props {
 const ShowStatus: React.FC<Props> = ({ carrera }) => {
   return (
     <div>
-
       <div>
         <h1>Asignaturas claves</h1>
         {carrera.asignaturas_claves.map((asignatura) => (
@@ -27,7 +26,6 @@ const ShowStatus: React.FC<Props> = ({ carrera }) => {
             <h1>{fase.seguimiento.nombre_fase}</h1>
             <h1>{fase.evaluacion.nombre_fase}</h1>
           </div>
-
         ))}
       </div>
       <br />

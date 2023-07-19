@@ -13,6 +13,11 @@ export const GET = async (
     },
     include: {
       asesora: true,
+      facultad: {
+        include: {
+          facultad: true,
+        },
+      },
       asignaturas_claves: {
         include: {
           asignatura: true,
