@@ -10,13 +10,13 @@ interface Props {
 const ShowStatus: React.FC<Props> = ({ carrera }) => {
   return (
     <div>
-      <p>{carrera.comite.valueOf()}</p>
-      {carrera.fases.map((fase) => (
-        <div>
-          {fase.seguimiento.nombre_fase}
-          {fase.evaluacion.nombre_fase}
-        </div>
-      ))}
+      <div>
+        {carrera.asignaturas_claves.map((asignatura) => (
+          <div key={asignatura.id}>
+            <h1>{asignatura.asignatura.name}</h1>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -65,7 +65,8 @@ const Home: React.FC<Props> = ({ carrera }) => {
         {selectedPlanilla?.name === "Bitacora" && (
           <div className="flex items-center justify-center p-8 my-4 bg-gray-100 rounded-md">
             <div className="w-full">
-              <ShowBitacora />
+              <ShowBitacora bitacora_anual={carrera.bitacora_anual} />
+
             </div>
           </div>
         )}
