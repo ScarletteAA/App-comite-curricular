@@ -55,10 +55,20 @@ export interface Evaluacion {
 
 export interface Bitacora_anual {
   id: string;
-  carrera: Carrera;
+  carrera: carrera_bitacora_anual;
+  id_carrera: string;
   year: string;
   bitacora_mensual: Bitacora_mensual[];
   asignaturas_criticas: Asignaturas_criticas[];
+}
+
+export interface carrera_bitacora_anual {
+  id: string;
+  codigo_carrera: string;
+  name: string;
+  asesoraId: string;
+  fechaInicio: string;
+  comite: boolean;
 }
 
 export interface Bitacora_mensual {

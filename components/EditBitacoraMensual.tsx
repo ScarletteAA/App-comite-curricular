@@ -7,7 +7,11 @@ import { useState } from "react";
 
 interface Props {
   selectedMes: Bitacora_mensual;
+  id_carrera: string;
+  nombre_carrera: string;
   setShowEdit: (showEdit: boolean) => void;
+  setDisabled: (disabled: boolean) => void;
+  disabled: boolean;
   router: AppRouterInstance;
   handleHidePopup: () => void;
 }
@@ -17,6 +21,10 @@ const EditBitacoraMensual: React.FC<Props> = ({
   setShowEdit,
   router,
   handleHidePopup,
+  setDisabled,
+  disabled,
+  id_carrera,
+  nombre_carrera,
 }) => {
   const [nSesionesPlanificadas, setNSesionesPlanificadas] = useState<number>(
     selectedMes.n_sesiones_planificadas
@@ -27,7 +35,6 @@ const EditBitacoraMensual: React.FC<Props> = ({
   const [comentarios, setComentarios] = useState<string>(
     selectedMes.comentarios
   );
-  const [disabled, setDisabled] = useState<boolean>(false);
 
   const handleSubmit = async () => {
     setDisabled(true);
@@ -40,6 +47,14 @@ const EditBitacoraMensual: React.FC<Props> = ({
         comentarios: comentarios,
       }
     );
+    const history = await axios.post("http://localhost:3000/api/history", {
+      id_carrera: id_carrera,
+      descripcion:
+        "Se actualizo la informacion de la bitacora mensual de " +
+        selectedMes.mes +
+        " para la carrera: " +
+        nombre_carrera,
+    });
     router.refresh();
     setShowEdit(false);
     setDisabled(false);

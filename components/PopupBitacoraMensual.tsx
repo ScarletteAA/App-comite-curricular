@@ -8,13 +8,18 @@ import EditBitacoraMensual from "./EditBitacoraMensual";
 interface Props {
   handleHidePopup: () => void;
   selectedMes: Bitacora_mensual;
+  id_carrera: string;
+  nombre_carrera: string;
 }
 
 const PopupBitacoraMensual: React.FC<Props> = ({
   handleHidePopup,
   selectedMes,
+  id_carrera,
+  nombre_carrera,
 }) => {
   const [showEdit, setShowEdit] = useState<boolean>(false);
+  const [disabled, setDisabled] = useState<boolean>(false);
   const router = useRouter();
 
   const handleShowEdit = () => {
@@ -33,6 +38,10 @@ const PopupBitacoraMensual: React.FC<Props> = ({
                   setShowEdit={setShowEdit}
                   router={router}
                   handleHidePopup={handleHidePopup}
+                  setDisabled={setDisabled}
+                  disabled={disabled}
+                  id_carrera={id_carrera}
+                  nombre_carrera={nombre_carrera}
                 />
               ) : (
                 <div className="border-b border-gray-200 shadow dark:border-gray-700 sm:rounded-lg ">
@@ -75,12 +84,14 @@ const PopupBitacoraMensual: React.FC<Props> = ({
           <button
             onClick={handleHidePopup}
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-1/8"
+            disabled={disabled}
           >
             Cerrar
           </button>
           <button
             onClick={handleShowEdit}
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-1/8 space-x-2"
+            disabled={disabled}
           >
             Editar bitacora
           </button>

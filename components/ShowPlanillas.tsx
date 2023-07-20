@@ -14,6 +14,8 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import EditStatus from "./EditStatus";
 import EditHistorico from "./EditHistorico";
+import usePopup from "@/hooks/usePopup";
+import CreateNewBitacora from "./CreateNewBitacora";
 
 interface Planilla {
   id: number;
@@ -39,6 +41,7 @@ const Home: React.FC<Props> = ({
     React.useState<Planilla | null>(null);
 
   const [showEdit, setShowEdit] = useState<boolean>(false);
+  const { showPopup, handleHidePopup, handleShowPopup } = usePopup();
   const router = useRouter();
 
   const planillas: Planilla[] = [
@@ -62,6 +65,10 @@ const Home: React.FC<Props> = ({
 
   const handleEditClick = () => {
     setShowEdit(!showEdit);
+  };
+
+  const handleCreateBitacora = () => {
+    handleShowPopup();
   };
 
   return (
@@ -93,6 +100,12 @@ const Home: React.FC<Props> = ({
             <div className="w-full">
               <ShowBitacora bitacora_anual={carrera.bitacora_anual} />
             </div>
+            <button
+              className="text-gray-200 block rounded-lg text-center font-medium leading-6 px-6 py-4 bg-gray-900 hover:bg-black hover:text-white"
+              onClick={handleCreateBitacora}
+            >
+              Crear nueva bitacora
+            </button>
           </div>
         )}
         {selectedPlanilla?.name === "Status" && (
@@ -146,6 +159,13 @@ const Home: React.FC<Props> = ({
       >
         Salir
       </button>
+      {showPopup && (
+        <CreateNewBitacora
+          handleHidePopup={handleHidePopup}
+          id_carrera={carrera.id}
+          nombre_carrera={carrera.name}
+        />
+      )}
     </main>
   );
 };

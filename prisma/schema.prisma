@@ -14,7 +14,6 @@ model sede {
   id          String     @id @default(uuid())
   name        String
   facultades  facultad[]
-  historiales history[]
 }
 
 model facultad {
@@ -23,7 +22,6 @@ model facultad {
   sede        sede      @relation(fields: [sedeId], references: [id])
   sedeId      String
   carreras    carreras_facultad[]
-  historiales history[]
 }
 
 model carreras_facultad {
@@ -47,6 +45,7 @@ model carrera {
   bitacora_anual     bitacora_anual[]
   comite             Boolean
   historico          historico?
+  history            history[]
 }
 
 model asignatura {
@@ -70,20 +69,15 @@ model asesora {
   email       String      @unique
   password    String
   carreras    carrera[]
-  historiales history[]
   historico   historico[]
 }
 
 model history {
   id          String   @id @default(uuid())
-  fecha       DateTime
+  fecha       String
   descripcion String
-  asesora     asesora  @relation(fields: [id_asesora], references: [id])
-  id_asesora  String
-  sede        sede     @relation(fields: [id_sede], references: [id])
-  id_sede     String
-  facultad    facultad @relation(fields: [id_facultad], references: [id])
-  id_facultad String
+  carrera     carrera  @relation(fields: [id_carrera], references: [id])
+  id_carrera  String
 }
 
 model seguimiento {

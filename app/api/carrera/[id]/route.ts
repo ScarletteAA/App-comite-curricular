@@ -35,6 +35,7 @@ export const GET = async (
               asignatura: true,
             },
           },
+          carrera: true,
         },
       },
       historico: {

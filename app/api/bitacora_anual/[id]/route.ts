@@ -16,6 +16,7 @@ export const GET = async (
           asignatura: true,
         },
       },
+      carrera: true,
     },
   });
   return NextResponse.json(bitacora_anual);

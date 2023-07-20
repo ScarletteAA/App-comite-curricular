@@ -2,8 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import { prisma } from "../prismaClient";
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
-  const { name, asesoraId, fechaInicio, comite_estado, codigoCarrera } =
-    await req.json();
+  const { name, asesoraId, fechaInicio, codigoCarrera } = await req.json();
   const carrera = await prisma.carrera.create({
     data: {
       name: name,
@@ -13,8 +12,39 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         },
       },
       fechaInicio: fechaInicio,
-      comite: comite_estado,
+      comite: false,
       codigo_carrera: codigoCarrera,
+      historico: {
+        create: {
+          ultimo_rediseno: "",
+          ultimo_ajuste_mayor: "",
+          ultimo_ajuste_menor: "",
+          fecha_resolucion_dgpre: "",
+          administradora_dgpre: "",
+          anos_ultimo_ajuste: 0,
+          numero_redisenos: 0,
+          asesora: {
+            connect: {
+              id: "2dd47a7e-6333-4928-82be-94bfe99aafc6",
+            },
+          },
+          observaciones: "",
+        },
+      },
+      fases: {
+        create: {
+          seguimiento: {
+            connect: {
+              id: "1bb702a6-1cae-4b01-aaf5-3e5fc78c0fde",
+            },
+          },
+          evaluacion: {
+            connect: {
+              id: "d7a11a03-d5be-44e4-8892-3ef8ddb00678",
+            },
+          },
+        },
+      },
     },
   });
   return NextResponse.json(carrera);

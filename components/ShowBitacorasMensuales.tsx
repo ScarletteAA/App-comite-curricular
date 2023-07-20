@@ -96,6 +96,8 @@ const ShowBitacorasMensuales: React.FC<Props> = ({
         <PopupBitacoraMensual
           handleHidePopup={handleHidePopup}
           selectedMes={selectedMes}
+          id_carrera={bitacora_anual.id_carrera}
+          nombre_carrera={bitacora_anual.carrera.name}
         />
       )}
     </div>
