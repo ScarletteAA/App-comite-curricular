@@ -23,8 +23,8 @@ const ShowStatus: React.FC<Props> = ({ carrera }) => {
         <h1>Fases</h1>
         {carrera.fases.map((fase) => (
           <div key={fase.id}>
-            <h1>{fase.seguimiento.nombre_fase}</h1>
-            <h1>{fase.evaluacion.nombre_fase}</h1>
+            <h2>Seguimiento: {fase.seguimiento.nombre_fase}</h2>
+            <h2>Evaluacion: {fase.evaluacion.nombre_fase}</h2>
           </div>
         ))}
       </div>

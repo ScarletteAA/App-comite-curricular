@@ -23,7 +23,7 @@ export interface Carrera {
   name: string;
   asesora: Asesora;
   fechaInicio: string;
-  comite: Boolean;
+  comite: boolean;
   asignaturas_claves: Asignaturas_claves[];
   fases: Fases_carrera[];
   bitacora_anual: Bitacora_anual[];
@@ -71,21 +71,22 @@ export interface Bitacora_mensual {
 
 export interface Asignaturas_criticas {
   id: string;
+  id_bitacora_anual: string;
   asignatura: Asignatura;
 }
 
 export interface Historico {
   id: String;
-  ultimo_rediseno: String;
-  ultimo_ajuste_mayor: String;
-  ultimo_ajuste_menor: String;
-  fecha_resolucion_dgpre: String;
-  administradora_dgpre: String;
+  ultimo_rediseno: string;
+  ultimo_ajuste_mayor: string;
+  ultimo_ajuste_menor: string;
+  fecha_resolucion_dgpre: string;
+  administradora_dgpre: string;
   anos_ultimo_ajuste: number;
   numero_redisenos: number;
   carrera: Carrera;
   asesora: Asesora;
-  observaciones: String;
+  observaciones: string;
 }
 
 export interface Asesora {

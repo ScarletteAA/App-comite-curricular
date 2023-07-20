@@ -3,10 +3,17 @@
 import ShowBitacora from "@/components/ShowBitacora";
 import ShowHistorico from "@/components/ShowHistorico";
 import ShowStatus from "@/components/ShowStatus";
-import { Carrera } from "@/interfaces";
-import Image from "next/image";
+import {
+  Asesora,
+  Asignatura,
+  Carrera,
+  Evaluacion,
+  Seguimiento,
+} from "@/interfaces";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
+import EditStatus from "./EditStatus";
+import EditHistorico from "./EditHistorico";
 
 interface Planilla {
   id: number;
@@ -15,12 +22,23 @@ interface Planilla {
 
 interface Props {
   carrera: Carrera;
+  asesoras: Asesora[];
+  seguimientos: Seguimiento[];
+  evaluaciones: Evaluacion[];
+  asignaturas: Asignatura[];
 }
 
-const Home: React.FC<Props> = ({ carrera }) => {
+const Home: React.FC<Props> = ({
+  carrera,
+  asesoras,
+  seguimientos,
+  evaluaciones,
+  asignaturas,
+}) => {
   const [selectedPlanilla, setSelectedPlanilla] =
     React.useState<Planilla | null>(null);
 
+  const [showEdit, setShowEdit] = useState<boolean>(false);
   const router = useRouter();
 
   const planillas: Planilla[] = [
@@ -42,6 +60,10 @@ const Home: React.FC<Props> = ({ carrera }) => {
     router.back();
   };
 
+  const handleEditClick = () => {
+    setShowEdit(!showEdit);
+  };
+
   return (
     <main className="flex flex-col items-center justify-center h-screen w-screen p-24">
       <h1 className="text-4xl font-bold">
@@ -55,7 +77,10 @@ const Home: React.FC<Props> = ({ carrera }) => {
               className={`flex items-center justify-center p-8 my-4 bg-gray-100 rounded-md
                   ${selectedPlanilla?.id === planilla.id ? "bg-green-500" : ""}
                 `}
-              onClick={() => setSelectedPlanilla(planilla)}
+              onClick={() => {
+                setSelectedPlanilla(planilla);
+                setShowEdit(false);
+              }}
             >
               <span>{planilla.name}</span>
             </li>
@@ -73,15 +98,45 @@ const Home: React.FC<Props> = ({ carrera }) => {
         {selectedPlanilla?.name === "Status" && (
           <div className="flex items-center justify-center p-8 my-4 bg-gray-100 rounded-md">
             <div className="w-full">
-              <ShowStatus carrera={carrera} />
+              {showEdit ? (
+                <EditStatus
+                  carrera={carrera}
+                  seguimientos={seguimientos}
+                  evaluaciones={evaluaciones}
+                  asignaturas={asignaturas}
+                  setShowEdit={setShowEdit}
+                />
+              ) : (
+                <ShowStatus carrera={carrera} />
+              )}
             </div>
+            <button
+              className="text-gray-200 block rounded-lg text-center font-medium leading-6 px-6 py-4 bg-gray-900 hover:bg-black hover:text-white"
+              onClick={handleEditClick}
+            >
+              Editar planilla
+            </button>
           </div>
         )}
         {selectedPlanilla?.name === "Historico" && (
           <div className="flex items-center justify-center p-8 my-4 bg-gray-100 rounded-md">
             <div className="w-full">
-              <ShowHistorico historico={carrera.historico} />
+              {showEdit ? (
+                <EditHistorico
+                  historico={carrera.historico}
+                  asesoras={asesoras}
+                  setShowEdit={setShowEdit}
+                />
+              ) : (
+                <ShowHistorico historico={carrera.historico} />
+              )}
             </div>
+            <button
+              className="text-gray-200 block rounded-lg text-center font-medium leading-6 px-6 py-4 bg-gray-900 hover:bg-black hover:text-white"
+              onClick={handleEditClick}
+            >
+              Editar planilla
+            </button>
           </div>
         )}
       </div>

@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-
-const prisma = new PrismaClient();
+import { prisma } from "../prismaClient";
 
 export const PATCH = async (req: NextRequest, res: NextResponse) => {
   const { id, n_sesiones_planificadas, n_sesiones_realizadas, comentarios } =

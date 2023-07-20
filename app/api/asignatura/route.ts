@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "../prismaClient";
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
   const { name, carreraId } = await req.json();
@@ -14,14 +12,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 };
 
 export const GET = async (req: NextRequest, res: NextResponse) => {
-  const asignaturas = await prisma.asignatura.findMany({
-    include: {
-      carreras: {
-        include: {
-          carrera: true,
-        },
-      },
-    },
-  });
+  const asignaturas = await prisma.asignatura.findMany();
   return NextResponse.json(asignaturas);
 };

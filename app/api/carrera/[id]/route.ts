@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-
-const prisma = new PrismaClient();
+import { prisma } from "../../prismaClient";
 
 export const GET = async (
   req: NextRequest,
@@ -42,6 +40,7 @@ export const GET = async (
       historico: {
         include: {
           asesora: true,
+          carrera: true,
         },
       },
     },
