@@ -3,18 +3,29 @@ import { verify, decode } from "jsonwebtoken";
 
 
 export const GET = async (req: NextRequest) => {
-    const authTokens = req.cookies.get("authTokens")?.value;
-    if (authTokens) {
-        try {
-            // const user = decode(authTokens, "secret", { complete: true })
-            // console.log(user)
-            // return NextResponse.json({
-            //     name: user.username,
-            //     email: user.email
-            // });
+    const authTokens = req.cookies.get('authTokens')?.value;
+    console.log(authTokens)
+    if (!authTokens) {
+        // decodifica el token
+        const decoded = decode(authTokens!);
+        console.log(decoded)
+        // verifica el token
+        const verified = verify(authTokens!, process.env.JWT_SECRET!);
+        console.log(verified)
+        // si el token es valido, retorna el usuario
+        if (verified) {
+            return NextResponse.next();
         }
-        catch (error) {
-            return NextResponse.json({ error: "Not authorized" }, { status: 401 });
-        }
+        // si el token no es valido, retorna un error
+        return NextResponse.next(
+            new Response(JSON.stringify({ message: "Unauthorized" }), {
+                status: 401,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }),
+        );
+
     }
-}
+};
+

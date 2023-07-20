@@ -10,7 +10,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     },
   });
   const token = jwt.sign(
-    { email: user!.email, id: user!.id },
+    { email: user!.email, id: user!.id, name: user!.name },
     process.env.JWT_SECRET!,
     { expiresIn: "1h" }
   );
