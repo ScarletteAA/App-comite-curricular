@@ -11,7 +11,9 @@ const ShowStatus: React.FC<Props> = ({ carrera }) => {
   return (
     <div>
       <div>
-        <h1>Asignaturas claves</h1>
+        <h1
+          className="font-bold"
+        >Asignaturas claves</h1>
         {carrera.asignaturas_claves.map((asignatura) => (
           <div key={asignatura.id}>
             <h1>{asignatura.asignatura.name}</h1>
@@ -20,7 +22,7 @@ const ShowStatus: React.FC<Props> = ({ carrera }) => {
       </div>
       <br />
       <div>
-        <h1>Fases</h1>
+        <h1 className="font-bold">Fases</h1>
         {carrera.fases.map((fase) => (
           <div key={fase.id}>
             <h2>Seguimiento: {fase.seguimiento.nombre_fase}</h2>
@@ -30,7 +32,7 @@ const ShowStatus: React.FC<Props> = ({ carrera }) => {
       </div>
       <br />
       <div>
-        <h1>Estado comite</h1>
+        <h1 className="font-bold">Estado comite</h1>
         {carrera.comite === true ? (
           <h1>Comite activo</h1>
         ) : (

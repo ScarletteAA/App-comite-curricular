@@ -68,8 +68,8 @@ const EditStatus: React.FC<Props> = ({
   return (
     <div>
       <div>
-        <h1>Editar status</h1>
-        <h1>Asignaturas claves</h1>
+        <h1 className="font-bold">Editar status</h1>
+        <h1 className="font-bold">Asignaturas claves</h1>
         {carrera.asignaturas_claves.map((asignatura) => (
           <div key={asignatura.id}>
             <h1>{asignatura.asignatura.name}</h1>
@@ -91,7 +91,7 @@ const EditStatus: React.FC<Props> = ({
       </div>
       <br />
       <div>
-        <h1>Fases</h1>
+        <h1 className="font-bold">Fases</h1>
         {carrera.fases.map((fase) => (
           <div key={fase.id}>
             <h2>

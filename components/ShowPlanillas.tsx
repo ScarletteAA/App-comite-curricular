@@ -16,6 +16,7 @@ import EditStatus from "./EditStatus";
 import EditHistorico from "./EditHistorico";
 import usePopup from "@/hooks/usePopup";
 import CreateNewBitacora from "./CreateNewBitacora";
+import { BaseNavbar } from "./BaseNavbar";
 
 interface Planilla {
   id: number;
@@ -72,18 +73,19 @@ const Home: React.FC<Props> = ({
   };
 
   return (
-    <main className="flex flex-col items-center justify-center h-screen w-screen p-24">
-      <h1 className="text-4xl font-bold">
-        Selecciona una opción para visualizar las planillas:{" "}
-      </h1>
-      <div className="">
-        <ul className="flex flex-wrap">
+    <main className="flex flex-col  h-screen w-screen">
+      <BaseNavbar title={carrera.name} />
+      <div className="px-2">
+        <h1 className="text-2xl font-bold">
+          Selecciona una opción para visualizar las planillas:{" "}
+        </h1>
+        <ul className="flex flex-wrap gap-4">
           {planillas.map((planilla) => (
             <li
               key={planilla.id}
-              className={`flex items-center justify-center p-8 my-4 bg-gray-100 rounded-md
+              className={`flex items-center justify-center p-6 my-4 bg-gray-100 rounded-md
                   ${selectedPlanilla?.id === planilla.id ? "bg-green-500" : ""}
-                `}
+            cursor-pointer hover:bg-green-500`}
               onClick={() => {
                 setSelectedPlanilla(planilla);
                 setShowEdit(false);
@@ -94,9 +96,11 @@ const Home: React.FC<Props> = ({
           ))}
         </ul>
       </div>
-      <div className="flex flex-col items-center justify-center p-24">
+      <div className="flex flex-col h-full w-full">
         {selectedPlanilla?.name === "Bitacora" && (
-          <div className="flex items-center justify-center p-8 my-4 bg-gray-100 rounded-md">
+          <div className="flex items-center justify-center p-8 bg-gray-100 rounded-md
+            h-full w-full
+          ">
             <div className="w-full">
               <ShowBitacora bitacora_anual={carrera.bitacora_anual} />
             </div>
@@ -109,7 +113,7 @@ const Home: React.FC<Props> = ({
           </div>
         )}
         {selectedPlanilla?.name === "Status" && (
-          <div className="flex items-center justify-center p-8 my-4 bg-gray-100 rounded-md">
+          <div className="flex items-center justify-center p-8 h-full bg-gray-100 rounded-md">
             <div className="w-full">
               {showEdit ? (
                 <EditStatus
@@ -132,7 +136,7 @@ const Home: React.FC<Props> = ({
           </div>
         )}
         {selectedPlanilla?.name === "Historico" && (
-          <div className="flex items-center justify-center p-8 my-4 bg-gray-100 rounded-md">
+          <div className="flex items-center justify-center h-full p-8 bg-gray-100 rounded-md">
             <div className="w-full">
               {showEdit ? (
                 <EditHistorico
@@ -153,12 +157,6 @@ const Home: React.FC<Props> = ({
           </div>
         )}
       </div>
-      <button
-        className="text-gray-200 block rounded-lg text-center font-medium leading-6 px-6 py-4 bg-gray-900 hover:bg-black hover:text-white"
-        onClick={handleBackClick}
-      >
-        Salir
-      </button>
       {showPopup && (
         <CreateNewBitacora
           handleHidePopup={handleHidePopup}

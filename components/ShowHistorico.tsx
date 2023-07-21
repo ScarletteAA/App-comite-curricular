@@ -9,7 +9,7 @@ interface Props {
 const ShowHistorico: React.FC<Props> = ({ historico }) => {
   return (
     <div>
-      <h1>Historico</h1>
+      <h1 className="font-bold">Historico</h1>
       <h1>Ultimo rediseño: {historico?.ultimo_rediseno}</h1>
       <h1>Ultimo ajuste mayor: {historico?.ultimo_ajuste_mayor}</h1>
       <h1>Ultimo ajuste menor: {historico?.ultimo_ajuste_menor}</h1>
