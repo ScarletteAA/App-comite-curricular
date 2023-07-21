@@ -5,7 +5,7 @@ export const POST = async (req: NextRequest) => {
   const { descripcion, id_carrera } = await req.json();
   const history = await prisma.history.create({
     data: {
-      fecha: new Date().toLocaleDateString(),
+      fecha: new Date().toLocaleString(),
       descripcion: descripcion,
       carrera: {
         connect: {

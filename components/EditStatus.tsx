@@ -55,6 +55,11 @@ const EditStatus: React.FC<Props> = ({
         }
       );
     }
+    const history = await axios.post("http://localhost:3000/api/history", {
+      id_carrera: carrera.id,
+      descripcion:
+        "Se actualizo la informacion del status de la carrera: " + carrera.name,
+    });
     router.refresh();
     setShowEdit(false);
     setDisabled(false);

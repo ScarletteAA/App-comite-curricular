@@ -45,10 +45,9 @@ const EditHistorico: React.FC<Props> = ({
   );
   const [disabled, setDisabled] = useState<boolean>(false);
   const router = useRouter();
-
   const handleSubmit = async () => {
     setDisabled(true);
-    console.log(historico);
+
     const res = await axios.patch("http://localhost:3000/api/historico", {
       id: historico.id,
       ultimo_rediseno: ultimoRediseno,
@@ -60,6 +59,12 @@ const EditHistorico: React.FC<Props> = ({
       n_redisenos: numeroRedisenos,
       id_asesora: selectedAsesora,
       observaciones: observaciones,
+    });
+    const history = await axios.post("http://localhost:3000/api/history", {
+      id_carrera: historico.carrera.id,
+      descripcion:
+        "Se actualizo la informacion del historico de la carrera: " +
+        historico.carrera.name,
     });
     router.refresh();
     setShowEdit(false);

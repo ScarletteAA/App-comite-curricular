@@ -24,11 +24,9 @@ export const ShowSedes: React.FC<Props> = ({ sedes }) => {
         <h2 className="text-2xl font-bold text-gray-900">Sedes</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-2 gap-4">
           {sedes.map((sede, index) => (
-            <button
+            <div
               className="mt-4 flex items-start justify-between cursor-pointer"
               key={index}
-              onClick={() => handleSelectedSede(sede)}
-              disabled={disabled}
             >
               <div>
                 <h3 className="text-sm text-gray-500">
@@ -39,14 +37,18 @@ export const ShowSedes: React.FC<Props> = ({ sedes }) => {
                   {sede.name}
                 </p>
 
-                <div className="relative h-48 w-full overflow-hidden rounded-lg bg-white">
+                <button
+                  className="relative h-48 w-full overflow-hidden rounded-lg bg-white"
+                  onClick={() => handleSelectedSede(sede)}
+                  disabled={disabled}
+                >
                   <img
                     src={sedeImages[sede.name.toLocaleLowerCase()]}
                     className="h-full w-full object-cover object-center"
                   ></img>
-                </div>
+                </button>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>

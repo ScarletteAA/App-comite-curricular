@@ -1,31 +1,35 @@
-import React from 'react'
+"use client";
+
+import { Historial } from "@/interfaces";
+import { useRouter } from "next/navigation";
+import React from "react";
 
 interface Props {
-    sede: string;
-    facultad: String
-    description: string;
-    date: string;
-    username: string;
+  history: Historial;
 }
-export const HistoryItem: React.FC<Props> = ({
-    sede,
-    facultad,
-    description,
-    date,
-    username
-}) => {
-    return (
-        <>
-            <div className="w-full px-2 inline-flex space-x-2 items-center border-b border-slate-700 py-3 hover:bg-white/5 transition ease-linear duration-150">
-                <div className="flex flex-col">
-                    <span className="text-m text-slate-300">{sede}</span>
-                    <span className="text-m text-slate-300">{facultad}</span>
-                    <span className="text-sm text-slate-300">{description}</span>
-                    <span className="text-xs text-slate-300">{date}</span>
-                    <span className="text-xs text-slate-300">{username}</span>
-                </div>
-            </div>
-        </>
+export const HistoryItem: React.FC<Props> = ({ history }) => {
+  const [selectedCarrera, setSelectedCarrera] = React.useState<string>("");
+  const [disabled, setDisabled] = React.useState<boolean>(false);
+  const router = useRouter();
 
-    )
-}
+  const handleSelectedCarrera = (id_carrera: string) => {
+    setSelectedCarrera(id_carrera);
+    setDisabled(true);
+    router.push("http://localhost:3000/homes/planilla/" + id_carrera);
+  };
+
+  return (
+    <>
+      <div className="w-full px-2 inline-flex space-x-2 items-center border-b border-slate-700 py-3 hover:bg-white/5 transition ease-linear duration-150">
+        <button
+          className="flex flex-col"
+          onClick={() => handleSelectedCarrera(history.id_carrera)}
+          disabled={disabled}
+        >
+          <span className="text-sm text-slate-300">{history.descripcion}</span>
+          <span className="text-xs text-slate-300">{history.fecha}</span>
+        </button>
+      </div>
+    </>
+  );
+};

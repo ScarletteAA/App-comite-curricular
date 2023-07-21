@@ -9,6 +9,9 @@ interface Props {
   asignaturas_criticas: Asignaturas_criticas[];
   asignaturas: Asignatura[];
   id_bitacora_anual: string;
+  id_carrera: string;
+  nombre_carrera: string;
+  nombre_bitacora: string;
   setShowEdit: (showEdit: boolean) => void;
 }
 
@@ -16,6 +19,9 @@ const EditAsignaturasCriticas: React.FC<Props> = ({
   asignaturas_criticas,
   asignaturas,
   id_bitacora_anual,
+  id_carrera,
+  nombre_carrera,
+  nombre_bitacora,
   setShowEdit,
 }) => {
   const [selectedAsignatura, setSelectedAsignatura] = useState<string>("");
@@ -35,6 +41,14 @@ const EditAsignaturasCriticas: React.FC<Props> = ({
           id_asignatura: selectedAsignatura,
         }
       );
+      const history = await axios.post("http://localhost:3000/api/history", {
+        id_carrera: id_carrera,
+        descripcion:
+          "Se agrego una asignatura critica a la bitacora " +
+          nombre_bitacora +
+          " para la carrera: " +
+          nombre_carrera,
+      });
     }
     router.refresh();
     setShowEdit(false);

@@ -111,9 +111,8 @@ export interface Asesora {
 export interface Historial {
   id: string;
   fecha: string;
-  asesora: Asesora;
-  facultad: Facultad;
-  sede: Sede;
+  descripcion: string;
+  id_carrera: string;
 }
 
 export interface Asignatura {
